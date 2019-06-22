@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Dominios y subdominios</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" media="screen" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+<body>
+    <div class="title">Dominios y subdominios</div>
+    <canvas id="pie-chart-nic-paraguay" width="400" height="200"></canvas>
+    </br>
+    </br>
+    <canvas id="pie-chart-nic-mexico" width="400" height="200"></canvas>
+    </br>
+    </br>
+    <canvas id="pie-chart-nic-argentina" width="400" height="200"></canvas>
+    </br>
+    </br>
+    <table>
+        <thead>
+            <tr>
+                <th>País</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Paraguay</td>
+                <td>com.py (19170 - 91,43%)</td>
+                <td>net.py (74 - 0.35%)</td>
+                <td>org.py (727- 3.47%)</td>
+                <td>gov.py (535 - 2.55%)</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>México</td>
+                <td>com.mx (769597 - 67,68%)</td>
+                <td>net.mx (308 - 0.02%)</td>
+                <td>org.mx (16326 - 1.44%)</td>
+                <td>-</td>
+                <td>gob.mx (9762 - 0.86%)</td>
+            </tr>
+            <tr>
+                <td>Argentina</td>
+                <td>com.ar (477403 - 96,1 %)</td>
+                <td>net.ar (3314 - 0.67%)</td>
+                <td>org.ar (9059 - 1.82%)</td>
+                <td>gov.ar (1239 - 0.25%)</td>
+                <td>gob.ar (3184 - 0.64%)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        // Paraguay.
+        var myChartNICParaguay = new Chart(document.getElementById("pie-chart-nic-paraguay"), {
+            type: 'pie',
+            data: {
+                labels: ["com.py","net.py","org.py","gov.py","edu.py","coop.py","mil.py"],
+                datasets: [{
+                    label: "Dominios .PY agrupados por subdominios",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#00aa00","#ff55ff"],
+                    data: [19170,74,727,535,336,102,22]
+                }]
+                },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Cantidad de dominios .PY agrupados por subdominios'
+                },
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var meta = dataset._meta[Object.keys(dataset._meta)[0]];
+                            var total = meta.total;
+                            var currentValue = dataset.data[tooltipItem.index];
+                            var percentage = parseFloat((currentValue/total*100).toFixed(2));
+                            return currentValue + ' (' + percentage + '%)';
+                        },
+                        title: function(tooltipItem, data) {
+                            return data.labels[tooltipItem[0].index];
+                        }
+                    }
+                }
+            }
+        });
+
+        // Mexico.
+        var myChartNICMexico = new Chart(document.getElementById("pie-chart-nic-mexico"), {
+            type: 'pie',
+            data: {
+                labels: ["com.mx","net.mx","org.mx","gob.mx","edu.mx","mx"],
+                datasets: [{
+                    label: "Dominios .MX agrupados por subdominios)",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#00aa00"],
+                    data: [769597,308,16326,9762,12358,328770]
+                }]
+                },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Cantidad de dominios .MX agrupados por subdominios'
+                },
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var meta = dataset._meta[Object.keys(dataset._meta)[0]];
+                            var total = meta.total;
+                            var currentValue = dataset.data[tooltipItem.index];
+                            var percentage = parseFloat((currentValue/total*100).toFixed(2));
+                            return currentValue + ' (' + percentage + '%)';
+                        },
+                        title: function(tooltipItem, data) {
+                            return data.labels[tooltipItem[0].index];
+                        }
+                    }
+                }
+            }
+        });
+
+        // Argentina.
+        var myChartNICArgentina = new Chart(document.getElementById("pie-chart-nic-argentina"), {
+            type: 'pie',
+            data: {
+                labels: ["com.ar","net.ar","org.ar","gob.ar","gov.ar","mil.ar","int.ar","musica.ar","tur.ar"],
+                datasets: [{
+                    label: "Dominios .AR agrupados por subdominios)",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#00aa00","#55007f","#005500","#ffe978"],
+                    data: [477403,3314,9059,3184,1239,26,20,358,2187]
+                }]
+                },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Cantidad de dominios .AR agrupados por subdominios'
+                },
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var meta = dataset._meta[Object.keys(dataset._meta)[0]];
+                            var total = meta.total;
+                            var currentValue = dataset.data[tooltipItem.index];
+                            var percentage = parseFloat((currentValue/total*100).toFixed(2));
+                            return currentValue + ' (' + percentage + '%)';
+                        },
+                        title: function(tooltipItem, data) {
+                            return data.labels[tooltipItem[0].index];
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    <footer>
+        <p class="copyright">© Proyectos Beta 2019</p>
+    </footer>
+</body>
+</html>
